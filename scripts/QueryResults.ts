@@ -4,7 +4,7 @@ import { abi } from "../artifacts/contracts/Ballot.sol/Ballot.json";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const CONTRACT_ADDRESS = "0x1ba1dd6573b07f53aeca4b11dce2cb46ac14a370";
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS || "";
 
 async function queryResults() {
   const providerApiKey = process.env.ALCHEMY_API_KEY || "";
