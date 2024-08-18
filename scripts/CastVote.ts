@@ -5,7 +5,7 @@ import { abi } from "../artifacts/contracts/Ballot.sol/Ballot.json";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const CONTRACT_ADDRESS = "0x1ba1dd6573b07f53aeca4b11dce2cb46ac14a370";
+const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS || "";
 const VOTING_ACCOUNT = "0x0D474076b39aD7bdD7c1C333Cd0645c8e64e8809";
 const PROPOSAL_INDEX = 0; // The index of the proposal to vote for
 
