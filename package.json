@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npx ts-node --files ./scripts/DeployWithViem.ts 'arg1' 'arg2' 'arg3'",
+    "vote": "npx ts-node --files ./scripts/CastVote.ts",
+    "delegate": "npx ts-node --files ./scripts/DelegateVote.ts",
+    "assign-voting-rights": "npx ts-node --files ./scripts/AssignVotingRights.ts 0x8d819fc976fc30070ef1975aaabdd11f23f0ca49 0x0D474076b39aD7bdD7c1C333Cd0645c8e64e8809",
+    "query-results": "npx ts-node --files ./scripts/QueryResults.ts"
   },
   "keywords": [],
   "author": "",

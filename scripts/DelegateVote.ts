@@ -6,40 +6,39 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const CONTRACT_ADDRESS = "0x1ba1dd6573b07f53aeca4b11dce2cb46ac14a370";
-const VOTING_ACCOUNT = "0x0D474076b39aD7bdD7c1C333Cd0645c8e64e8809";
-const PROPOSAL_INDEX = 0; // The index of the proposal to vote for
+const DELEGATE_TO_ADDRESS = "0x0D474076b39aD7bdD7c1C333Cd0645c8e64e8809";
+async function delegateVote() {
+    const providerApiKey = process.env.ALCHEMY_API_KEY || "";
+    const delegatorPrivateKey = process.env.PRIVATE_KEY || "";
 
-async function castVote() {
-  const providerApiKey = process.env.ALCHEMY_API_KEY || "";
-  const voterPrivateKey = process.env.VOTER_PRIVATE_KEY || "";
-
+    // Set up the public client and wallet client
   const publicClient = createPublicClient({
     chain: sepolia,
     transport: http(`https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`),
   });
 
-  const account = privateKeyToAccount(`0x${voterPrivateKey}`);
-
-  const voter = createWalletClient({
+  const account = privateKeyToAccount(`0x${delegatorPrivateKey}`);
+  const delegator = createWalletClient({
     account,
     chain: sepolia,
     transport: http(`https://eth-sepolia.g.alchemy.com/v2/${providerApiKey}`),
   });
-
-  const hash = await voter.writeContract({
+    // Connect to the deployed contract
+     const hash = await delegator.writeContract({
     address: CONTRACT_ADDRESS,
     abi,
-    functionName: "vote",
-    args: [BigInt(PROPOSAL_INDEX)],
+    functionName: "delegate",
+    args: [DELEGATE_TO_ADDRESS],
   });
-
-  console.log("Transaction hash:", hash);
+    // Execute the delegate function
+    // Wait for and log the transaction receipt
+    console.log("Transaction hash:", hash);
   console.log("Waiting for confirmations...");
   const receipt = await publicClient.waitForTransactionReceipt({ hash });
-  console.log("Vote cast successfully");
+  console.log("Delegation was successfully");
 }
 
-castVote().catch((error) => {
+delegateVote().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });

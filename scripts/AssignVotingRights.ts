@@ -5,7 +5,7 @@ import { abi } from "../artifacts/contracts/Ballot.sol/Ballot.json";
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const CONTRACT_ADDRESS = "0xb0f30f11dffa200f93a35d8aada85bd27fde2e58";
+const CONTRACT_ADDRESS = "0x1ba1dd6573b07f53aeca4b11dce2cb46ac14a370";
 const ACCOUNT_TO_GIVE_RIGHTS = "0x0D474076b39aD7bdD7c1C333Cd0645c8e64e8809";
 
 async function giveVotingRights() {
